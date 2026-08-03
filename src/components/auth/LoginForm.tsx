@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { FormEventHandler } from "react";
 import type { LoginCredentials } from "../../types/auth";
+import "./LoginForm.css";
 
 
 interface LoginFormProps {
@@ -34,8 +35,19 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
 
 
   return (
+
+    
     <form onSubmit={handleSubmit}>
-      <h1>Iniciar sesión</h1>
+      
+      <img
+    src="/LOL.png"
+    alt="Logo de la banda"
+    className="logo"
+  />
+
+  <h1>Iniciar Sesión</h1>
+
+      
 
 
       <div>
