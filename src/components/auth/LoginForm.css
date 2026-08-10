@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #001f54, #003b8e);
+  background: linear-gradient(135deg, #67c03d, #024430);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ form {
 /* Título */
 form h1 {
   text-align: center;
-  color: #FFD60A;
+  color: #b6a137;
   margin-bottom: 30px;
   font-size: 2rem;
   letter-spacing: 1px;
@@ -57,7 +57,7 @@ input {
 }
 
 input:focus {
-  border-color: #FFD60A;
+  border-color: #b6a137;
   box-shadow: 0 0 10px rgba(255, 214, 10, 0.5);
 }
 
@@ -72,8 +72,8 @@ button {
   padding: 14px;
   border: none;
   border-radius: 10px;
-  background: #FFD60A;
-  color: #001f54;
+  background: #b6a137;
+  color: #0e6e1e;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
@@ -115,7 +115,7 @@ p[role="alert"] {
   filter: drop-shadow(0 0 10px rgba(255, 214, 10, 0.5));
 }
 form h1::after {
-  content: "Banda Juvenil";
+  content: "SAS";
   display: block;
   font-size: 0.9rem;
   color: white;
