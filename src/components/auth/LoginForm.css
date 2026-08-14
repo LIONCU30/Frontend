@@ -1,125 +1,401 @@
-/* Fondo de la página */
+Error de permisos
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+
+Mongo encender
+net start MongoDB
+
+
+/* =========================================================
+   SAS - LOGIN
+   Diseño independiente del HomePage
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+}
+
+body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #67c03d, #024430);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background: #024430;
 }
 
-/* Contenedor del formulario */
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+========================================================= */
+
 form {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  padding: 40px;
-  width: 360px;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 410px;
+  max-width: calc(100% - 40px);
+
+  padding: 42px 45px 40px;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.30);
+
+  position: relative;
+
+  overflow: hidden;
+
+  color: #024430;
 }
 
-/* Título */
+
+/* =========================================================
+   FRANJA SUPERIOR
+========================================================= */
+
+form::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 7px;
+
+  background: linear-gradient(
+    90deg,
+    #67c03d,
+    #b6a137,
+    #67c03d
+  );
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+  display: block;
+
+  width: 92px;
+  height: 92px;
+
+  object-fit: contain;
+
+  margin: 5px auto 18px;
+
+  filter:
+    drop-shadow(
+      0 5px 8px rgba(2, 68, 48, 0.20)
+    );
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
 form h1 {
+  margin: 0;
+
   text-align: center;
-  color: #b6a137;
-  margin-bottom: 30px;
+
+  color: #024430;
+
   font-size: 2rem;
-  letter-spacing: 1px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
 }
 
-/* Espaciado entre campos */
-form div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 18px;
-}
 
-/* Etiquetas */
-label {
-  color: white;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
+/* Subtítulo SAS */
+
+form h1::after {
+  content: "SISTEMA DE ADMINISTRACIÓN DE SURTIDORES";
+
+  display: block;
+
+  margin-top: 8px;
+
+  color: #777;
+
+  font-size: 0.68rem;
+
   font-weight: 500;
+
+  letter-spacing: 1.4px;
+
+  line-height: 1.5;
 }
 
-/* Inputs */
-input {
-  padding: 12px 15px;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.92);
-  transition: all 0.3s ease;
-  outline: none;
+
+/* =========================================================
+   CAMPOS DEL FORMULARIO
+========================================================= */
+
+form div {
+  margin-top: 24px;
 }
+
+
+/* =========================================================
+   ETIQUETAS
+========================================================= */
+
+label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #024430;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 15px;
+
+  background: #f6f8f7;
+
+  border: 1.5px solid #d8dfdb;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  color: #024430;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Hover */
+
+input:hover {
+  border-color: #9bb59f;
+}
+
+
+/* Focus */
 
 input:focus {
+  background: #ffffff;
+
   border-color: #b6a137;
-  box-shadow: 0 0 10px rgba(255, 214, 10, 0.5);
+
+  box-shadow:
+    0 0 0 3px rgba(182, 161, 55, 0.15);
 }
+
 
 /* Placeholder */
+
 input::placeholder {
-  color: #888;
+  color: #999;
 }
 
-/* Botón */
+
+/* =========================================================
+   MENSAJE DE ERROR
+========================================================= */
+
+p[role="alert"] {
+  margin: 18px 0 0;
+
+  padding: 12px 14px;
+
+  background: #fff1f1;
+
+  border-left: 4px solid #d9534f;
+
+  border-radius: 7px;
+
+  color: #a52a2a;
+
+  font-size: 0.85rem;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   BOTÓN INGRESAR
+========================================================= */
+
 button {
   width: 100%;
-  padding: 14px;
+
+  height: 50px;
+
+  margin-top: 28px;
+
   border: none;
-  border-radius: 10px;
+
+  border-radius: 9px;
+
   background: #b6a137;
-  color: #0e6e1e;
+
+  color: #024430;
+
+  font-family: inherit;
+
   font-size: 1rem;
-  font-weight: bold;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
   cursor: pointer;
-  transition: 0.3s;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
+
+
+/* Hover */
 
 button:hover {
   background: #ffea4d;
+
   transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(255, 214, 10, 0.4);
+
+  box-shadow:
+    0 8px 18px rgba(182, 161, 55, 0.28);
 }
+
+
+/* Active */
 
 button:active {
-  transform: scale(0.98);
+  transform: translateY(0);
+
+  box-shadow: none;
 }
 
-/* Mensaje de error */
-p[role="alert"] {
-  background: rgba(255, 77, 77, 0.15);
-  border-left: 4px solid #ff4d4d;
-  color: #ffdede;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
+
+/* =========================================================
+   DECORACIÓN DEL FORMULARIO
+========================================================= */
+
+form::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -70px;
+  right: -70px;
+
+  width: 150px;
+  height: 150px;
+
+  border-radius: 50%;
+
+  background: rgba(103, 192, 61, 0.08);
+
+  pointer-events: none;
 }
 
-/* Responsive */
+
+/* =========================================================
+   FONDO GENERAL DEL LOGIN
+========================================================= */
+
+body::before {
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(103, 192, 61, 0.22),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(182, 161, 55, 0.18),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #67c03d 0%,
+      #024430 55%,
+      #013528 100%
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media (max-width: 480px) {
-  form {
-    width: 90%;
-    padding: 30px 20px;
+
+  body {
+    padding: 20px 0;
   }
-}
-.logo {
-  display: block;
-  width: 90px;
-  margin: 0 auto 15px;
-  filter: drop-shadow(0 0 10px rgba(255, 214, 10, 0.5));
-}
-form h1::after {
-  content: "SAS";
-  display: block;
-  font-size: 0.9rem;
-  color: white;
-  font-weight: normal;
-  margin-top: 8px;
-  letter-spacing: 2px;
+
+  form {
+    width: calc(100% - 30px);
+
+    padding: 35px 25px 30px;
+
+    border-radius: 16px;
+  }
+
+  .logo {
+    width: 78px;
+    height: 78px;
+  }
+
+  form h1 {
+    font-size: 1.7rem;
+  }
+
+  form h1::after {
+    font-size: 0.6rem;
+
+    letter-spacing: 1px;
+  }
+
+  input {
+    height: 46px;
+  }
+
+  button {
+    height: 48px;
+  }
 }

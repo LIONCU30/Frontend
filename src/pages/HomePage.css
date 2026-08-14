@@ -1,0 +1,448 @@
+/* ================================
+   HOME PAGE
+================================ */
+
+.home-page {
+  min-height: 100vh;
+  background: #f3f6f4;
+  color: #173b2b;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ================================
+   ENCABEZADO
+================================ */
+
+.home-header {
+  background: linear-gradient(135deg, #024430, #08733f);
+  color: white;
+  padding: 25px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-logo img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.home-logo h2 {
+  margin: 0;
+  color: #b6a137;
+  font-size: 1.8rem;
+}
+
+.home-logo p {
+  margin: 3px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.logout-button {
+  background: #b6a137;
+  color: #173b2b;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background: #ffdf3f;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   PRESENTACIÓN
+================================ */
+
+.hero {
+  min-height: 360px;
+  padding: 70px 7%;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(
+      rgba(2, 68, 48, 0.85),
+      rgba(2, 68, 48, 0.7)
+    ),
+    url("/surtidor-principal.jpg") center/cover;
+  color: white;
+}
+
+.hero-content {
+  max-width: 650px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0 0 20px;
+}
+
+.hero h1 span {
+  color: #e0c23d;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.hero-button {
+  display: inline-block;
+  padding: 14px 25px;
+  background: #b6a137;
+  color: #173b2b;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.hero-button:hover {
+  background: #ffdf3f;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   ESTADÍSTICAS
+================================ */
+
+.statistics {
+  width: 86%;
+  margin: -50px auto 50px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow: hidden;
+  position: relative;
+}
+
+.stat {
+  padding: 25px;
+  text-align: center;
+  border-right: 1px solid #e5e5e5;
+}
+
+.stat:last-child {
+  border-right: none;
+}
+
+.stat-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.stat h3 {
+  margin: 5px 0;
+  color: #024430;
+  font-size: 1.8rem;
+}
+
+.stat p {
+  margin: 0;
+  color: #777;
+}
+
+/* ================================
+   SECCIÓN SURTIDORES
+================================ */
+
+.stations-section {
+  width: 86%;
+  margin: auto;
+  padding-bottom: 60px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  color: #024430;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.section-title p {
+  color: #666;
+}
+
+/* ================================
+   TARJETAS
+================================ */
+
+.stations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.station-card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.station-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+}
+
+.station-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+.station-content {
+  padding: 22px;
+}
+
+.station-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.station-header h3 {
+  margin: 0;
+  color: #024430;
+  font-size: 1.3rem;
+}
+
+/* ================================
+   ESTADO
+================================ */
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status.open {
+  background: #d9f7df;
+  color: #08733f;
+}
+
+.status.closed {
+  background: #ffdede;
+  color: #c62828;
+}
+
+/* ================================
+   UBICACIÓN
+================================ */
+
+.location {
+  color: #777;
+  margin: 10px 0 20px;
+  font-size: 0.9rem;
+}
+
+/* ================================
+   PRECIOS
+================================ */
+
+.prices {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.price {
+  color: #024430;
+  font-weight: bold;
+}
+
+/* ================================
+   INFORMACIÓN
+================================ */
+
+.station-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-label {
+  color: #555;
+}
+
+.info-value {
+  font-weight: bold;
+}
+
+.available {
+  color: #08733f;
+}
+
+.unavailable {
+  color: #c62828;
+}
+
+.queue-low {
+  color: #08733f;
+}
+
+.queue-medium {
+  color: #d18b00;
+}
+
+.queue-high {
+  color: #c62828;
+}
+
+/* ================================
+   SECCIÓN INFORMACIÓN
+================================ */
+
+.info-section {
+  background: linear-gradient(135deg, #024430, #08733f);
+  color: white;
+  padding: 60px 7%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.info-image {
+  width: 45%;
+  max-width: 500px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.info-content {
+  max-width: 600px;
+}
+
+.info-content h2 {
+  color: #e0c23d;
+  font-size: 2.2rem;
+}
+
+.info-content p {
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.home-footer {
+  background: #012b1f;
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+.home-footer h3 {
+  color: #b6a137;
+  margin-bottom: 8px;
+}
+
+.home-footer p {
+  margin: 5px;
+  opacity: 0.8;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1000px) {
+  .stations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .statistics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat:nth-child(2) {
+    border-right: none;
+  }
+
+  .info-section {
+    flex-direction: column;
+  }
+
+  .info-image {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .home-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero {
+    padding: 50px 7%;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .statistics {
+    width: 90%;
+    grid-template-columns: 1fr;
+    margin-top: -30px;
+  }
+
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .stations-section {
+    width: 90%;
+  }
+
+  .stations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-section {
+    padding: 45px 7%;
+  }
+}
