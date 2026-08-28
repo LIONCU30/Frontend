@@ -1,63 +1,75 @@
-Error de permisos
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+/* =====================================================
+   LOGIN
+   Estilo visual inspirado en el HomePage
+   ===================================================== */
 
+.login-page {
+  min-height: 100vh;
+  width: 100%;
 
-Mongo encender
-net start MongoDB
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-
-/* =========================================================
-   SAS - LOGIN
-   Diseño independiente del HomePage
-========================================================= */
-
-* {
+  padding: 40px 20px;
   box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(103, 192, 61, 0.20),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #67c03d 0%,
+      #176b43 45%,
+      #024430 100%
+    );
+
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #024430;
-}
+/* =====================================================
+   TARJETA DEL LOGIN
+   ===================================================== */
 
+.login-container {
+  width: 100%;
+  max-width: 430px;
 
-/* =========================================================
-   CONTENEDOR PRINCIPAL
-========================================================= */
+  padding: 42px;
 
-form {
-  width: 410px;
-  max-width: calc(100% - 40px);
+  box-sizing: border-box;
 
-  padding: 42px 45px 40px;
+  background: rgba(255, 255, 255, 0.96);
 
-  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
 
-  border-radius: 20px;
+  border-radius: 24px;
 
   box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.30);
+    0 25px 60px rgba(0, 45, 30, 0.35);
+
+  color: #123c2a;
 
   position: relative;
 
   overflow: hidden;
 
-  color: #024430;
+  animation: loginAppear 0.5s ease;
 }
 
 
-/* =========================================================
-   FRANJA SUPERIOR
-========================================================= */
+/* Detalle verde superior */
 
-form::before {
+.login-container::before {
   content: "";
 
   position: absolute;
@@ -66,336 +78,288 @@ form::before {
   left: 0;
 
   width: 100%;
-  height: 7px;
+  height: 6px;
 
   background: linear-gradient(
     90deg,
     #67c03d,
-    #b6a137,
-    #67c03d
+    #2d8a4f,
+    #024430
   );
 }
 
 
-/* =========================================================
-   LOGO
-========================================================= */
+/* =====================================================
+   FORMULARIO
+   ===================================================== */
 
-.logo {
-  display: block;
-
-  width: 92px;
-  height: 92px;
-
-  object-fit: contain;
-
-  margin: 5px auto 18px;
-
-  filter:
-    drop-shadow(
-      0 5px 8px rgba(2, 68, 48, 0.20)
-    );
+.login-container form {
+  width: 100%;
 }
 
 
-/* =========================================================
+/* =====================================================
    TÍTULO
-========================================================= */
+   ===================================================== */
 
-form h1 {
-  margin: 0;
+.login-container h1 {
+  margin: 0 0 34px;
 
   text-align: center;
 
+  font-size: 31px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.5px;
+
   color: #024430;
-
-  font-size: 2rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.5px;
 }
 
 
-/* Subtítulo SAS */
+/* Pequeño detalle debajo del título */
 
-form h1::after {
-  content: "SISTEMA DE ADMINISTRACIÓN DE SURTIDORES";
+.login-container h1::after {
+  content: "";
 
   display: block;
 
-  margin-top: 8px;
+  width: 55px;
+  height: 4px;
 
-  color: #777;
+  margin: 12px auto 0;
 
-  font-size: 0.68rem;
+  border-radius: 20px;
 
-  font-weight: 500;
-
-  letter-spacing: 1.4px;
-
-  line-height: 1.5;
+  background: #67c03d;
 }
 
 
-/* =========================================================
-   CAMPOS DEL FORMULARIO
-========================================================= */
-
-form div {
-  margin-top: 24px;
-}
-
-
-/* =========================================================
+/* =====================================================
    ETIQUETAS
-========================================================= */
+   ===================================================== */
 
-label {
+.login-container label {
   display: block;
 
   margin-bottom: 8px;
 
-  color: #024430;
+  color: #18543a;
 
-  font-size: 0.9rem;
+  font-size: 14px;
 
-  font-weight: 600;
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
 }
 
 
-/* =========================================================
-   INPUTS
-========================================================= */
+/* =====================================================
+   CAMPOS
+   ===================================================== */
 
-input {
+.login-container input {
   width: 100%;
 
-  height: 48px;
+  height: 50px;
 
   padding: 0 15px;
 
-  background: #f6f8f7;
+  margin-bottom: 22px;
 
-  border: 1.5px solid #d8dfdb;
+  box-sizing: border-box;
 
-  border-radius: 9px;
+  border: 1px solid #d6e2db;
 
-  outline: none;
+  border-radius: 12px;
 
-  color: #024430;
+  background: #f6f9f7;
+
+  color: #163c2c;
 
   font-family: inherit;
 
-  font-size: 0.95rem;
+  font-size: 15px;
+
+  outline: none;
 
   transition:
-    border-color 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-
-/* Hover */
-
-input:hover {
-  border-color: #9bb59f;
-}
-
-
-/* Focus */
-
-input:focus {
-  background: #ffffff;
-
-  border-color: #b6a137;
-
-  box-shadow:
-    0 0 0 3px rgba(182, 161, 55, 0.15);
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 
 /* Placeholder */
 
-input::placeholder {
-  color: #999;
+.login-container input::placeholder {
+  color: #8a9b92;
 }
 
 
-/* =========================================================
-   MENSAJE DE ERROR
-========================================================= */
+/* Campo seleccionado */
 
-p[role="alert"] {
-  margin: 18px 0 0;
+.login-container input:focus {
+  background: #ffffff;
+
+  border-color: #67c03d;
+
+  box-shadow:
+    0 0 0 4px rgba(103, 192, 61, 0.15);
+
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   MENSAJE DE ERROR
+   ===================================================== */
+
+.login-container .error {
+  margin: -5px 0 20px;
 
   padding: 12px 14px;
 
+  border-radius: 10px;
+
   background: #fff1f1;
 
-  border-left: 4px solid #d9534f;
+  border: 1px solid #f1caca;
 
-  border-radius: 7px;
+  color: #b42323;
 
-  color: #a52a2a;
+  text-align: center;
 
-  font-size: 0.85rem;
+  font-size: 14px;
 
-  line-height: 1.4;
+  font-weight: 600;
 }
 
 
-/* =========================================================
+/* =====================================================
    BOTÓN INGRESAR
-========================================================= */
+   ===================================================== */
 
-button {
+.login-container button {
   width: 100%;
 
   height: 50px;
 
-  margin-top: 28px;
+  margin-top: 4px;
 
   border: none;
 
-  border-radius: 9px;
+  border-radius: 12px;
 
-  background: #b6a137;
+  background: linear-gradient(
+    135deg,
+    #67c03d,
+    #2f8b4e
+  );
 
-  color: #024430;
+  color: white;
 
   font-family: inherit;
 
-  font-size: 1rem;
+  font-size: 16px;
 
   font-weight: 700;
 
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 
   cursor: pointer;
 
+  box-shadow:
+    0 8px 18px rgba(45, 126, 67, 0.25);
+
   transition:
-    background 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
 }
 
 
 /* Hover */
 
-button:hover {
-  background: #ffea4d;
+.login-container button:hover {
+  filter: brightness(1.06);
 
   transform: translateY(-2px);
 
   box-shadow:
-    0 8px 18px rgba(182, 161, 55, 0.28);
+    0 12px 24px rgba(45, 126, 67, 0.32);
 }
 
 
-/* Active */
+/* Click */
 
-button:active {
+.login-container button:active {
   transform: translateY(0);
 
-  box-shadow: none;
+  box-shadow:
+    0 5px 12px rgba(45, 126, 67, 0.22);
 }
 
 
-/* =========================================================
-   DECORACIÓN DEL FORMULARIO
-========================================================= */
+/* =====================================================
+   ANIMACIÓN
+   ===================================================== */
 
-form::after {
-  content: "";
+@keyframes loginAppear {
+  from {
+    opacity: 0;
 
-  position: absolute;
+    transform:
+      translateY(15px)
+      scale(0.98);
+  }
 
-  bottom: -70px;
-  right: -70px;
+  to {
+    opacity: 1;
 
-  width: 150px;
-  height: 150px;
-
-  border-radius: 50%;
-
-  background: rgba(103, 192, 61, 0.08);
-
-  pointer-events: none;
+    transform:
+      translateY(0)
+      scale(1);
+  }
 }
 
 
-/* =========================================================
-   FONDO GENERAL DEL LOGIN
-========================================================= */
-
-body::before {
-  content: "";
-
-  position: fixed;
-
-  inset: 0;
-
-  z-index: -1;
-
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(103, 192, 61, 0.22),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 80%,
-      rgba(182, 161, 55, 0.18),
-      transparent 28%
-    ),
-    linear-gradient(
-      135deg,
-      #67c03d 0%,
-      #024430 55%,
-      #013528 100%
-    );
-}
-
-
-/* =========================================================
+/* =====================================================
    RESPONSIVE
-========================================================= */
+   ===================================================== */
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
 
-  body {
-    padding: 20px 0;
+  .login-page {
+    padding: 25px 16px;
   }
 
-  form {
-    width: calc(100% - 30px);
+  .login-container {
+    max-width: 430px;
 
-    padding: 35px 25px 30px;
+    padding: 34px 25px;
 
-    border-radius: 16px;
+    border-radius: 20px;
   }
 
-  .logo {
-    width: 78px;
-    height: 78px;
+  .login-container h1 {
+    font-size: 27px;
+
+    margin-bottom: 30px;
+  }
+}
+
+
+@media (max-width: 380px) {
+
+  .login-container {
+    padding: 30px 20px;
   }
 
-  form h1 {
-    font-size: 1.7rem;
+  .login-container h1 {
+    font-size: 24px;
   }
 
-  form h1::after {
-    font-size: 0.6rem;
-
-    letter-spacing: 1px;
-  }
-
-  input {
-    height: 46px;
-  }
-
-  button {
-    height: 48px;
-  }
+ 
 }
