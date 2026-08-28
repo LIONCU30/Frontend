@@ -1,619 +1,249 @@
 
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authRepository } from "../repositories/authRepository";
+import { stations } from "../data/stations";
+import Sidebar from "../components/Sidebar";
+import StationCard from "../components/StationCard";
 import "./HomePage.css";
 
 function HomePage() {
+
   const navigate = useNavigate();
+
   const user = authRepository.getCurrentUser();
 
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("todos");
+  const totalStations = stations.length;
 
-  const handleLogout = () => {
-    authRepository.logout();
-    navigate("/login", { replace: true });
-  };
+  const openStations =
+    stations.filter((station) => station.open).length;
 
-  const stations = [
-    {
-      name: "Surtidor Central",
-      location: "Av. Principal, zona Centro",
-      image: "/surtidor1.jpg",
-      special: "Bs 6.74",
-      premium: "Bs 7.18",
-      diesel: "Bs 6.96",
-      queue: 8,
-      fuel: true,
-      open: true,
-    },
-    {
-      name: "Surtidor Norte",
-      location: "Av. Banzer, zona Norte",
-      image: "/surtidor2.jpg",
-      special: "Bs 6.74",
-      premium: "Bs 7.18",
-      diesel: "Bs 6.96",
-      queue: 15,
-      fuel: true,
-      open: true,
-    },
-    {
-      name: "Surtidor Sur",
-      location: "Av. Cristo Redentor",
-      image: "/surtidor3.jpg",
-      special: "Bs 6.74",
-      premium: "Bs 7.18",
-      diesel: "Bs 6.96",
-      queue: 22,
-      fuel: true,
-      open: true,
-    },
-    {
-      name: "Surtidor Este",
-      location: "Av. Virgen de Cotoca",
-      image: "/surtidor4.jpg",
-      special: "Bs 6.74",
-      premium: "Bs 7.18",
-      diesel: "Bs 6.96",
-      queue: 0,
-      fuel: false,
-      open: false,
-    },
-    {
-      name: "Surtidor Oeste",
-      location: "Av. Doble Vía La Guardia",
-      image: "/surtidor5.jpg",
-      special: "Bs 6.74",
-      premium: "Bs 7.18",
-      diesel: "Bs 6.96",
-      queue: 5,
-      fuel: true,
-      open: true,
-    },
-    {
-      name: "Surtidor Universidad",
-      location: "Zona Universitaria",
-      image: "/surtidor6.jpg",
-      special: "Bs 6.74",
-      premium: "Bs 7.18",
-      diesel: "Bs 6.96",
-      queue: 0,
-      fuel: false,
-      open: false,
-    },
-  ];
+  const availableFuel =
+    stations.filter((station) => station.fuel).length;
 
-  const filteredStations = stations.filter((station) => {
-    const matchesSearch =
-      station.name.toLowerCase().includes(search.toLowerCase()) ||
-      station.location.toLowerCase().includes(search.toLowerCase());
-
-    if (filter === "abiertos") {
-      return matchesSearch && station.open;
-    }
-
-    if (filter === "cerrados") {
-      return matchesSearch && !station.open;
-    }
-
-    if (filter === "combustible") {
-      return matchesSearch && station.fuel;
-    }
-
-    if (filter === "sin-combustible") {
-      return matchesSearch && !station.fuel;
-    }
-
-    return matchesSearch;
-  });
+  const totalQueue =
+    stations.reduce(
+      (total, station) => total + station.queue,
+      0
+    );
 
   return (
-    <main className="dashboard">
+    <div className="dashboard">
 
-      {/* =========================
-          BARRA LATERAL
-      ========================= */}
-
-      <aside className="sidebar">
-
-        <div className="sidebar-brand">
-          <div className="brand-icon">⛽</div>
-
-          <div>
-            <h2>SAS</h2>
-            <span>Administración</span>
-          </div>
-        </div>
-
-        <nav className="sidebar-nav">
-
-          <a href="#inicio" className="nav-item active">
-            <span>🏠</span>
-            Inicio
-          </a>
-
-          <a href="#surtidores" className="nav-item">
-            <span>⛽</span>
-            Surtidores
-          </a>
-
-          <a href="#estadisticas" className="nav-item">
-            <span>📊</span>
-            Estadísticas
-          </a>
-
-          <a href="#informacion" className="nav-item">
-            <span>ℹ️</span>
-            Información
-          </a>
-
-        </nav>
-
-        <div className="sidebar-bottom">
-
-          {user && (
-            <div className="user-card">
-              <div className="user-avatar">
-                {user.name?.charAt(0).toUpperCase() || "U"}
-              </div>
-
-              <div className="user-info">
-                <strong>{user.name}</strong>
-                <span>{user.role}</span>
-              </div>
-            </div>
-          )}
-
-          <button
-            className="sidebar-logout"
-            type="button"
-            onClick={handleLogout}
-          >
-            🚪 Cerrar sesión
-          </button>
-
-        </div>
-
-      </aside>
+      <Sidebar />
 
 
-      {/* =========================
-          CONTENIDO PRINCIPAL
-      ========================= */}
-
-      <div className="dashboard-content" id="inicio">
-
-        {/* HEADER */}
+      <main className="dashboard-content">
 
         <header className="dashboard-header">
 
           <div>
+
             <span className="header-label">
               PANEL PRINCIPAL
             </span>
 
             <h1>
-              Información de surtidores
+              Bienvenido{user ? `, ${user.name}` : ""}
             </h1>
 
             <p>
-              Consulta el estado actual de las estaciones.
+              Consulta rápidamente el estado
+              de los surtidores.
             </p>
+
           </div>
 
+
           <div className="header-status">
+
             <span className="online-dot"></span>
+
             Sistema operativo
+
           </div>
 
         </header>
 
 
-        {/* =========================
-            ESTADÍSTICAS
-        ========================= */}
+        {/* ESTADÍSTICAS */}
 
-        <section
-          className="statistics"
-          id="estadisticas"
-        >
+        <section className="statistics">
 
           <div className="stat-card">
-
-            <div className="stat-icon green">
-              ⛽
-            </div>
+            <span className="stat-icon">⛽</span>
 
             <div>
-              <span>Surtidores registrados</span>
-              <strong>6</strong>
+              <small>Surtidores</small>
+              <strong>{totalStations}</strong>
             </div>
-
           </div>
 
 
           <div className="stat-card">
-
-            <div className="stat-icon gold">
-              🚗
-            </div>
+            <span className="stat-icon">🚗</span>
 
             <div>
-              <span>Autos en cola</span>
-              <strong>50</strong>
+              <small>Autos en cola</small>
+              <strong>{totalQueue}</strong>
             </div>
-
           </div>
 
 
           <div className="stat-card">
-
-            <div className="stat-icon blue">
-              💧
-            </div>
+            <span className="stat-icon">💧</span>
 
             <div>
-              <span>Con combustible</span>
-              <strong>4</strong>
+              <small>Con combustible</small>
+              <strong>{availableFuel}</strong>
             </div>
-
           </div>
 
 
           <div className="stat-card">
-
-            <div className="stat-icon dark">
-              🟢
-            </div>
+            <span className="stat-icon">🟢</span>
 
             <div>
-              <span>Surtidores abiertos</span>
-              <strong>4</strong>
+              <small>Abiertos</small>
+              <strong>{openStations}</strong>
             </div>
-
           </div>
 
         </section>
 
 
-        {/* =========================
-            BARRA DE BÚSQUEDA
-        ========================= */}
+        {/* RESUMEN */}
 
-        <section className="control-panel">
+        <section className="home-grid">
 
-          <div className="search-box">
+          <div className="summary-card">
 
-            <span>🔍</span>
-
-            <input
-              type="text"
-              placeholder="Buscar surtidor o ubicación..."
-              value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
-            />
-
-          </div>
-
-
-          <select
-            value={filter}
-            onChange={(event) =>
-              setFilter(event.target.value)
-            }
-          >
-
-            <option value="todos">
-              Todos los surtidores
-            </option>
-
-            <option value="abiertos">
-              Solo abiertos
-            </option>
-
-            <option value="cerrados">
-              Solo cerrados
-            </option>
-
-            <option value="combustible">
-              Con combustible
-            </option>
-
-            <option value="sin-combustible">
-              Sin combustible
-            </option>
-
-          </select>
-
-        </section>
-
-
-        {/* =========================
-            SURTIDORES
-        ========================= */}
-
-        <section
-          className="stations-section"
-          id="surtidores"
-        >
-
-          <div className="section-heading">
-
-            <div>
-              <span>ESTACIONES</span>
-
-              <h2>Surtidores disponibles</h2>
-            </div>
-
-            <p>
-              {filteredStations.length} resultados
-            </p>
-
-          </div>
-
-
-          <div className="stations-grid">
-
-            {filteredStations.map((station) => (
-
-              <article
-                className="station-card"
-                key={station.name}
-              >
-
-                <div className="station-image-wrapper">
-
-                  <img
-                    src={station.image}
-                    alt={station.name}
-                    className="station-image"
-                  />
-
-                  <span
-                    className={
-                      station.open
-                        ? "station-status open"
-                        : "station-status closed"
-                    }
-                  >
-                    <span></span>
-                    {station.open
-                      ? "ABIERTO"
-                      : "CERRADO"}
-                  </span>
-
-                </div>
-
-
-                <div className="station-content">
-
-                  <div className="station-title">
-
-                    <h3>{station.name}</h3>
-
-                    <span className="station-location">
-                      📍 {station.location}
-                    </span>
-
-                  </div>
-
-
-                  {/* PRECIOS */}
-
-                  <div className="prices">
-
-                    <div className="price-item">
-                      <span>
-                        Gasolina Especial
-                      </span>
-
-                      <strong>
-                        {station.special}
-                      </strong>
-                    </div>
-
-                    <div className="price-item">
-                      <span>
-                        Gasolina Premium
-                      </span>
-
-                      <strong>
-                        {station.premium}
-                      </strong>
-                    </div>
-
-                    <div className="price-item">
-                      <span>
-                        Diésel
-                      </span>
-
-                      <strong>
-                        {station.diesel}
-                      </strong>
-                    </div>
-
-                  </div>
-
-
-                  {/* INFORMACIÓN */}
-
-                  <div className="station-details">
-
-                    <div className="detail">
-
-                      <span className="detail-icon">
-                        🚗
-                      </span>
-
-                      <div>
-                        <small>
-                          Cola de autos
-                        </small>
-
-                        <strong
-                          className={
-                            station.queue <= 5
-                              ? "queue-low"
-                              : station.queue <= 15
-                              ? "queue-medium"
-                              : "queue-high"
-                          }
-                        >
-                          {station.queue} autos
-                        </strong>
-                      </div>
-
-                    </div>
-
-
-                    <div className="detail">
-
-                      <span className="detail-icon">
-                        ⛽
-                      </span>
-
-                      <div>
-
-                        <small>
-                          Combustible
-                        </small>
-
-                        <strong
-                          className={
-                            station.fuel
-                              ? "fuel-available"
-                              : "fuel-unavailable"
-                          }
-                        >
-                          {station.fuel
-                            ? "Disponible"
-                            : "No disponible"}
-                        </strong>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </article>
-
-            ))}
-
-          </div>
-
-
-          {filteredStations.length === 0 && (
-
-            <div className="empty-state">
-
-              <span>🔎</span>
-
-              <h3>
-                No se encontraron surtidores
-              </h3>
-
-              <p>
-                Intenta cambiar la búsqueda o el filtro.
-              </p>
-
-            </div>
-
-          )}
-
-        </section>
-
-
-        {/* =========================
-            INFORMACIÓN
-        ========================= */}
-
-        <section
-          className="info-section"
-          id="informacion"
-        >
-
-          <div className="info-text">
-
-            <span>ACERCA DEL SISTEMA</span>
+            <span className="section-label">
+              ESTADO GENERAL
+            </span>
 
             <h2>
-              Todo lo que necesitas saber
-              sobre los surtidores.
+              Estado de las estaciones
             </h2>
 
-            <p>
-              SAS permite consultar de manera rápida
-              y sencilla la información de diferentes
-              estaciones de servicio.
-            </p>
-
-            <p>
-              Puedes revisar precios de combustible,
-              disponibilidad, cantidad de vehículos
-              en cola y estado de cada establecimiento.
-            </p>
-
-          </div>
-
-
-          <div className="info-visual">
-
-            <img
-              src="/surtidor-info.jpg"
-              alt="Surtidor de combustible"
-            />
-
-            <div className="info-badge">
-
-              <span>⛽</span>
+            <div className="summary-list">
 
               <div>
-                <strong>
-                  Información actualizada
-                </strong>
+                <span>🟢 Surtidores abiertos</span>
+                <strong>{openStations}</strong>
+              </div>
 
-                <small>
-                  Estado de las estaciones
-                </small>
+              <div>
+                <span>🔴 Surtidores cerrados</span>
+                <strong>
+                  {totalStations - openStations}
+                </strong>
+              </div>
+
+              <div>
+                <span>⛽ Con combustible</span>
+                <strong>{availableFuel}</strong>
+              </div>
+
+              <div>
+                <span>⚠ Sin combustible</span>
+                <strong>
+                  {totalStations - availableFuel}
+                </strong>
               </div>
 
             </div>
 
           </div>
 
+
+          <div className="quick-card">
+
+            <span className="section-label">
+              ACCESO RÁPIDO
+            </span>
+
+            <h2>
+              ¿Qué deseas consultar?
+            </h2>
+
+            <button
+              onClick={() => navigate("/surtidores")}
+            >
+              ⛽ Ver surtidores
+            </button>
+
+            <button
+              onClick={() => navigate("/estadisticas")}
+            >
+              📊 Ver estadísticas
+            </button>
+
+            <button
+              onClick={() => navigate("/informacion")}
+            >
+              ℹ️ Información del sistema
+            </button>
+
+          </div>
+
         </section>
 
 
-        {/* =========================
-            FOOTER
-        ========================= */}
+        {/* SURTIDORES DESTACADOS */}
+
+        <section className="featured-section">
+
+          <div className="section-heading">
+
+            <div>
+
+              <span className="section-label">
+                VISTA RÁPIDA
+              </span>
+
+              <h2>
+                Surtidores destacados
+              </h2>
+
+            </div>
+
+            <button
+              className="view-all"
+              onClick={() => navigate("/surtidores")}
+            >
+              Ver todos →
+            </button>
+
+          </div>
+
+
+          <div className="featured-grid">
+
+            {stations.slice(0, 3).map((station) => (
+              <StationCard
+                key={station.id}
+                station={station}
+              />
+            ))}
+
+          </div>
+
+        </section>
+
 
         <footer className="dashboard-footer">
 
-          <div>
-            <strong>SAS</strong>
+          <strong>SAS</strong>
 
-            <span>
-              Sistema de Administración de Surtidores
-            </span>
-          </div>
-
-          <p>
-            © 2026 SAS
-          </p>
+          <span>
+            Sistema de Administración de Surtidores
+          </span>
 
         </footer>
 
-      </div>
+      </main>
 
-    </main>
+    </div>
   );
 }
 
